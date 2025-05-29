@@ -1,13 +1,11 @@
+import 'package:demo/color_palette.dart';
+import 'package:demo/custom_text_field.dart';
+import 'package:demo/main_page.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,37 +15,26 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextField(
-                cursorColor: Colors.deepOrange,
-                decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.search),
-                  hintText: "Email",
-
-                  filled: true,
-
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(32),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(32),
-                  ),
-                ),
-              ),
+              CustomTextField(icon: Icon(Icons.search), hintText: "Search"),
               SizedBox(height: 8),
-              TextField(
-                cursorColor: Colors.deepOrange,
-                decoration: InputDecoration(
-                  filled: true,
-                  prefixIcon: Icon(Icons.lock),
-                  hintText: "Password",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(32),
+              CustomTextField(icon: Icon(Icons.lock), hintText: "Password"),
+              SizedBox(height: 8),
+              SizedBox(
+                width: double.infinity,
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    backgroundColor: ColorPalette.primary,
+                    foregroundColor: Colors.white,
+                    side: BorderSide(color: ColorPalette.primary),
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(32),
-                  ),
+                  onPressed: () => {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => MainPage()),
+                    ),
+                  },
+                  child: Text("Sign in"),
                 ),
-                obscureText: true,
               ),
             ],
           ),
