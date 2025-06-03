@@ -1,4 +1,4 @@
-import 'package:demo/color_palette.dart';
+import 'package:demo/core/themes/color_palette.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {

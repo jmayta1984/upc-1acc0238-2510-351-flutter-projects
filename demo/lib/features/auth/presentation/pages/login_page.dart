@@ -1,6 +1,6 @@
-import 'package:demo/color_palette.dart';
-import 'package:demo/custom_text_field.dart';
-import 'package:demo/main_page.dart';
+import 'package:demo/core/themes/color_palette.dart';
+import 'package:demo/core/ui/custom_text_field.dart';
+import 'package:demo/features/app/presentation/pages/main_page.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
