@@ -5,6 +5,7 @@ class Shoe {
   final String gender;
   final int price;
   final String image;
+  final String brand;
 
   Shoe({
     required this.id,
@@ -13,5 +14,6 @@ class Shoe {
     required this.gender,
     required this.price,
     required this.image,
+    required this.brand
   });
 }
