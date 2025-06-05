@@ -6,6 +6,9 @@ class Shoe {
   final int price;
   final String image;
   final String brand;
+  final String description;
+  final double rating;
+  final List<ShoeSize> sizes;
 
   Shoe({
     required this.id,
@@ -14,6 +17,19 @@ class Shoe {
     required this.gender,
     required this.price,
     required this.image,
-    required this.brand
+    required this.brand,
+    required this.description,
+    required this.rating,
+    required this.sizes,
+  });
+}
+
+class ShoeSize {
+  final String size;
+  final int stock;
+
+  ShoeSize({
+    required this.size,
+    required this.stock,
   });
 }
