@@ -1,5 +1,6 @@
 import 'package:demo/core/ui/custom_text_field.dart';
 import 'package:demo/features/home/data/datasources/shoe_service.dart';
+import 'package:demo/features/home/data/repositories/shoe_repository.dart';
 import 'package:demo/features/home/domain/entities/shoe.dart';
 import 'package:demo/features/home/presentation/widgets/banner_view.dart';
 import 'package:demo/features/home/presentation/widgets/shoe_list_view.dart';
@@ -21,7 +22,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> loadData() async {
-    List<Shoe> shoes = await ShoeService().getShoes();
+    List<Shoe> shoes = await ShoeRepository(
+      shoeService: ShoeService(),
+    ).getShoes();
     setState(() {
       _shoes = shoes;
     });
