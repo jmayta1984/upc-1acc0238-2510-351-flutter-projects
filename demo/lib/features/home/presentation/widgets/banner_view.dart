@@ -11,9 +11,7 @@ class BannerView extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        gradient: LinearGradient(
-          colors: [Colors.black, ColorPalette.primary],
-        ),
+        color: ColorPalette.primary
       ),
       child: Row(
         children: [
