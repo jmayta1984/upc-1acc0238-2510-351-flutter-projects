@@ -1,10 +1,15 @@
+import 'package:demo/core/themes/color_palette.dart';
 import 'package:demo/core/ui/custom_text_field.dart';
 import 'package:demo/features/home/data/datasources/shoe_service.dart';
 import 'package:demo/features/home/data/repositories/shoe_repository.dart';
 import 'package:demo/features/home/domain/entities/shoe.dart';
+import 'package:demo/features/home/presentation/blocs/shoe_bloc.dart';
+import 'package:demo/features/home/presentation/blocs/shoe_event.dart';
+import 'package:demo/features/home/presentation/blocs/shoe_state.dart';
 import 'package:demo/features/home/presentation/widgets/banner_view.dart';
 import 'package:demo/features/home/presentation/widgets/shoe_list_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,21 +19,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Shoe> _shoes = [];
   @override
   void initState() {
-    loadData();
     super.initState();
+    context.read<ShoeBloc>().add(GetShoes());
   }
 
-  Future<void> loadData() async {
-    List<Shoe> shoes = await ShoeRepository(
-      shoeService: ShoeService(),
-    ).getShoes();
-    setState(() {
-      _shoes = shoes;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +32,22 @@ class _HomePageState extends State<HomePage> {
       children: [
         CustomTextField(icon: Icon(Icons.search), hintText: "Search"),
         BannerView(),
-        Expanded(child: ShoeListView(shoes: _shoes)),
+        Expanded(
+          child: BlocBuilder<ShoeBloc, ShoeState>(
+            builder: (context, state) {
+              if (state is LoadingShoeState) {
+                return Center(
+                  child: CircularProgressIndicator(color: ColorPalette.primary),
+                );
+              } else if (state is LoadedShoeState) {
+                return ShoeListView(shoes: state.shoes);
+              } else if (state is ErrorShoeState) {
+                Text(state.errorMessage);
+              }
+              return Center();
+            },
+          ),
+        ),
       ],
     );
   }
