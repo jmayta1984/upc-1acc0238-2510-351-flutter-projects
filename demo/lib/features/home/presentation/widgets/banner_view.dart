@@ -38,12 +38,12 @@ class BannerView extends StatelessWidget {
                     OutlinedButton(
                       
                       style: OutlinedButton.styleFrom(
-                        backgroundColor: ColorPalette.primary,
+                        backgroundColor: Colors.black,
                         foregroundColor: Colors.white,
                         side: BorderSide(color: ColorPalette.primary),
                       ),
                       onPressed: () => {},
-                      child: Text("Shop Now"),
+                      child: Text("Shop now"),
                     ),
                   ],
                 ),
