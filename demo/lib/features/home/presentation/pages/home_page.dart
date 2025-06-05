@@ -1,8 +1,8 @@
 import 'package:demo/core/ui/custom_text_field.dart';
 import 'package:demo/features/home/data/datasources/shoe_service.dart';
 import 'package:demo/features/home/domain/entities/shoe.dart';
-import 'package:demo/features/home/presentation/views/banner_view.dart';
-import 'package:demo/features/home/presentation/views/shoe_list_view.dart';
+import 'package:demo/features/home/presentation/widgets/banner_view.dart';
+import 'package:demo/features/home/presentation/widgets/shoe_list_view.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
