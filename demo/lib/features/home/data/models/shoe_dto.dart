@@ -70,7 +70,7 @@ class ShoeSizeDto {
   factory ShoeSizeDto.fromJson(Map<String, dynamic> json) {
     return ShoeSizeDto(
       size: (json['size'] as num).toDouble(),
-      stock: json['stock'] as int,
+      stock: json['quantity'] as int,
     );
   }
 
