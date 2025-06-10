@@ -1,8 +1,5 @@
 import 'package:demo/core/themes/color_palette.dart';
 import 'package:demo/core/ui/custom_text_field.dart';
-import 'package:demo/features/home/data/datasources/shoe_service.dart';
-import 'package:demo/features/home/data/repositories/shoe_repository.dart';
-import 'package:demo/features/home/domain/entities/shoe.dart';
 import 'package:demo/features/home/presentation/blocs/shoe_bloc.dart';
 import 'package:demo/features/home/presentation/blocs/shoe_event.dart';
 import 'package:demo/features/home/presentation/blocs/shoe_state.dart';
