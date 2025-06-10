@@ -48,7 +48,7 @@ class _ShoeDetailPageState extends State<ShoeDetailPage> {
                       },
                       icon: Icon(
                         _isFavorite ? Icons.favorite : Icons.favorite_border,
-                      //  color: _isFavorite ? ColorPalette.primary : Colors.grey,
+                        //  color: _isFavorite ? ColorPalette.primary : Colors.grey,
                       ),
                     ),
                   ),
@@ -96,7 +96,6 @@ class _ShoeDetailPageState extends State<ShoeDetailPage> {
                       setState(() {
                         _selectedSizeIndex = index;
                       });
-                      ;
                     },
                     child: Center(
                       child: Container(
@@ -134,13 +133,11 @@ class _ShoeDetailPageState extends State<ShoeDetailPage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: SizedBox(
         width: double.infinity,
-        child: OutlinedButton(
-          style: OutlinedButton.styleFrom(
+        child: FilledButton(
+          style: FilledButton.styleFrom(
             backgroundColor: ColorPalette.primary,
-            foregroundColor: Colors.white,
-            side: BorderSide(color: ColorPalette.primary),
           ),
-          onPressed: () => {},
+          onPressed: (_selectedSizeIndex >= 0) ? () {} : null,
           child: Text("Add to cart"),
         ),
       ),
