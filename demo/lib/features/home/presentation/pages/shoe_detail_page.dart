@@ -1,6 +1,10 @@
 import 'package:demo/core/themes/color_palette.dart';
+import 'package:demo/features/favorites/presentation/blocs/favorite_bloc.dart';
+import 'package:demo/features/favorites/presentation/blocs/favorite_event.dart';
 import 'package:demo/features/home/domain/entities/shoe.dart';
+import 'package:demo/features/home/domain/entities/shoe_extensiones.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ShoeDetailPage extends StatefulWidget {
   const ShoeDetailPage({super.key, required this.shoe});
@@ -16,7 +20,8 @@ class _ShoeDetailPageState extends State<ShoeDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    final List<ShoeSize> sizes = widget.shoe.sizes;
+    final Shoe shoe = widget.shoe;
+    final List<ShoeSize> sizes = shoe.sizes;
 
     return Scaffold(
       body: NestedScrollView(
@@ -45,10 +50,10 @@ class _ShoeDetailPageState extends State<ShoeDetailPage> {
                         setState(() {
                           _isFavorite = !_isFavorite;
                         });
+                        context.read<FavoriteBloc>().add(AddFavoriteEvent(favorite: shoe.toFavorite()));
                       },
                       icon: Icon(
                         _isFavorite ? Icons.favorite : Icons.favorite_border,
-                        //  color: _isFavorite ? ColorPalette.primary : Colors.grey,
                       ),
                     ),
                   ),
