@@ -1,3 +1,4 @@
+import 'package:demo/features/favorites/data/datasources/favorite_shoe_dao.dart';
 import 'package:demo/features/home/data/datasources/shoe_service.dart';
 import 'package:demo/features/home/data/repositories/shoe_repository.dart';
 import 'package:demo/features/home/domain/entities/shoe.dart';
@@ -11,8 +12,10 @@ class ShoeBloc extends Bloc<ShoeEvent, ShoeState> {
       emit(LoadingShoeState());
       try {
         final List<Shoe> shoes = await ShoeRepository(
-          shoeService: ShoeService(),
+          shoeService: ShoeService(), favoriteShoeDao: FavoriteShoeDao(),
         ).getShoes();
+
+        
         emit(LoadedShoeState(shoes: shoes));
       } catch (e) {
         emit(ErrorShoeState(errorMessage: e.toString()));

@@ -53,8 +53,7 @@ class ShoeDto {
       brand: brand,
       description: description,
       rating: rating,
-      sizes: sizes.map((size) => size.toDomain()).toList(),
-    );
+      sizes: sizes.map((size) => size.toDomain()).toList()    );
   }
 }
 

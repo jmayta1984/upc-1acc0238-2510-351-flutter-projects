@@ -1,3 +1,4 @@
+
 class Shoe {
   final int id;
   final String name;
@@ -9,6 +10,7 @@ class Shoe {
   final String description;
   final double rating;
   final List<ShoeSize> sizes;
+  final bool isFavorite;
 
   Shoe({
     required this.id,
@@ -21,8 +23,29 @@ class Shoe {
     required this.description,
     required this.rating,
     required this.sizes,
+    this.isFavorite = false
   });
+
+  Shoe copyWithFavorite(bool isFavorite) {
+    return Shoe(
+      id: id,
+      name: name,
+      category: category,
+      gender: gender,
+      price: price,
+      image: image,
+      brand: brand,
+      description: description,
+      rating: rating,
+      sizes: sizes,
+      isFavorite: isFavorite
+    );
+  }
+
+
 }
+
+
 
 class ShoeSize {
   final String size;

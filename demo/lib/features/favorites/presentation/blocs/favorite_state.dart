@@ -10,3 +10,8 @@ class LoadedFavoriteState extends FavoriteState {
   final List<FavoriteShoe> favorites;
   const LoadedFavoriteState({required this.favorites});
 }
+
+class IsFavoriteState extends FavoriteState {
+  final bool isFavorite;
+  const IsFavoriteState({required this.isFavorite});
+}
