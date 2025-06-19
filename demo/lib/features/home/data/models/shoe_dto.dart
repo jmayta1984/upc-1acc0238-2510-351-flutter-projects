@@ -42,7 +42,7 @@ class ShoeDto {
     );
   }
 
-  Shoe toDomain() {
+  Shoe toDomain({bool isFavorite = false}) {
     return Shoe(
       id: id,
       name: name,
@@ -53,7 +53,9 @@ class ShoeDto {
       brand: brand,
       description: description,
       rating: rating,
-      sizes: sizes.map((size) => size.toDomain()).toList()    );
+      sizes: sizes.map((size) => size.toDomain()).toList(),
+      isFavorite: isFavorite,
+    );
   }
 }
 
@@ -61,10 +63,7 @@ class ShoeSizeDto {
   final double size;
   final int stock;
 
-  ShoeSizeDto({
-    required this.size,
-    required this.stock,
-  });
+  ShoeSizeDto({required this.size, required this.stock});
 
   factory ShoeSizeDto.fromJson(Map<String, dynamic> json) {
     return ShoeSizeDto(
@@ -74,10 +73,6 @@ class ShoeSizeDto {
   }
 
   ShoeSize toDomain() {
-    return ShoeSize(
-      size: size.toString(),
-      stock: stock,
-    );
+    return ShoeSize(size: size.toString(), stock: stock);
   }
-  
 }

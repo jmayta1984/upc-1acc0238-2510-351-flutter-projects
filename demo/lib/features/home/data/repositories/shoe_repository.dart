@@ -12,14 +12,12 @@ class ShoeRepository {
 
   Future<List<Shoe>> getShoes() async {
     final dtos = await shoeService.getShoes();
+    final favoriteDtos = await favoriteShoeDao.fetchAll();
+    final ids = favoriteDtos.map((dto) => dto.id).toList();
 
-    final shoes = await Future.wait(
-      dtos.map((e) async {
-        final isFavorite = await favoriteShoeDao.isFavorite(e.id);
-        final shoe = e.toDomain();
-        return shoe.copyWithFavorite(isFavorite);
-      }),
-    );
+    final shoes = dtos
+        .map((dto) => dto.toDomain(isFavorite: ids.contains(dto.id)))
+        .toList();
     return shoes;
   }
 }

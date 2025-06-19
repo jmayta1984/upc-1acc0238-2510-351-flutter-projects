@@ -6,27 +6,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
   final _repository = FavoriteShoeRepository();
 
-  FavoriteBloc() : super(InitialFavoriteState()) {
+  FavoriteBloc() : super(FavoriteState(favorites: [])) {
     on<AddFavoriteEvent>((event, emit) async {
       await _repository.insertFavorite(event.favorite);
-      final favorites = await _repository.fetchAll();
-      emit(LoadedFavoriteState(favorites: favorites));
+      await _onGetAll(emit);
     });
 
     on<RemoveFavoriteEvent>((event, emit) async {
       await _repository.deleteFavorite(event.id);
-      final favorites = await _repository.fetchAll();
-      emit(LoadedFavoriteState(favorites: favorites));
+      await _onGetAll(emit);
     });
 
     on<GetAllFavoriteEvent>((event, emit) async {
-      final favorites = await _repository.fetchAll();
-      emit(LoadedFavoriteState(favorites: favorites));
+      await _onGetAll(emit);
     });
+  }
 
-    on<CheckFavoriteEvent>((event, emit) async {
-      final isFavorite = await _repository.isFavorite(event.id);
-      emit(IsFavoriteState(isFavorite: isFavorite));
-    });
+  Future<void> _onGetAll(Emitter<FavoriteState> emit) async {
+    final favorites = await _repository.fetchAll();
+    emit(FavoriteState(favorites: favorites));
   }
 }

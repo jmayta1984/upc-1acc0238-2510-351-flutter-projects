@@ -13,6 +13,7 @@ class FavoritesPage extends StatefulWidget {
 }
 
 class _FavoritesPageState extends State<FavoritesPage> {
+  
   @override
   void initState() {
     context.read<FavoriteBloc>().add(GetAllFavoriteEvent());
@@ -24,12 +25,9 @@ class _FavoritesPageState extends State<FavoritesPage> {
     return Scaffold(
       body: BlocBuilder<FavoriteBloc, FavoriteState>(
         builder: (context, state) {
-          if (state is LoadedFavoriteState) {
-            return state.favorites.isEmpty
-                ? Center(child: Text('No favorites'))
-                : FavoriteShoeListView(favoriteShoes: state.favorites);
-          }
-          return Center();
+          return state.favorites.isEmpty
+              ? Center(child: Text('No favorites'))
+              : FavoriteShoeListView(favoriteShoes: state.favorites);
         },
       ),
     );

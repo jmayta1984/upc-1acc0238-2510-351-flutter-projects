@@ -1,4 +1,3 @@
-
 class Shoe {
   final int id;
   final String name;
@@ -23,10 +22,10 @@ class Shoe {
     required this.description,
     required this.rating,
     required this.sizes,
-    this.isFavorite = false
+    required this.isFavorite,
   });
 
-  Shoe copyWithFavorite(bool isFavorite) {
+  Shoe copyWithFavorite({required bool isFavorite}) {
     return Shoe(
       id: id,
       name: name,
@@ -38,21 +37,14 @@ class Shoe {
       description: description,
       rating: rating,
       sizes: sizes,
-      isFavorite: isFavorite
+      isFavorite: isFavorite,
     );
   }
-
-
 }
-
-
 
 class ShoeSize {
   final String size;
   final int stock;
 
-  ShoeSize({
-    required this.size,
-    required this.stock,
-  });
+  ShoeSize({required this.size, required this.stock});
 }

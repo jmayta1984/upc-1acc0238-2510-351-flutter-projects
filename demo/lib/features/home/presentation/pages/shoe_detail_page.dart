@@ -1,9 +1,10 @@
 import 'package:demo/core/themes/color_palette.dart';
 import 'package:demo/features/favorites/presentation/blocs/favorite_bloc.dart';
-import 'package:demo/features/favorites/presentation/blocs/favorite_event.dart';
 import 'package:demo/features/favorites/presentation/blocs/favorite_state.dart';
 import 'package:demo/features/home/domain/entities/shoe.dart';
-import 'package:demo/features/home/domain/entities/shoe_extensions.dart';
+import 'package:demo/features/home/presentation/blocs/shoe_bloc.dart';
+import 'package:demo/features/home/presentation/blocs/shoe_event.dart';
+import 'package:demo/features/home/presentation/blocs/shoe_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,13 +18,6 @@ class ShoeDetailPage extends StatefulWidget {
 
 class _ShoeDetailPageState extends State<ShoeDetailPage> {
   int _selectedSizeIndex = -1;
-  bool _isFavorite = false;
-
-  @override
-  void initState() {
-    super.initState();
-    context.read<FavoriteBloc>().add(CheckFavoriteEvent(id: widget.shoe.id));
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,13 +25,7 @@ class _ShoeDetailPageState extends State<ShoeDetailPage> {
     final List<ShoeSize> sizes = shoe.sizes;
 
     return BlocListener<FavoriteBloc, FavoriteState>(
-      listener: (context, state) {
-        if (state is IsFavoriteState) {
-          setState(() {
-            _isFavorite = state.isFavorite;
-          });
-        }
-      },
+      listener: (context, state) {},
       child: Scaffold(
         body: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
@@ -66,21 +54,25 @@ class _ShoeDetailPageState extends State<ShoeDetailPage> {
                       top: 60,
                       child: IconButton(
                         onPressed: () {
-                          setState(() {
-                            _isFavorite = !_isFavorite;
-                          });
-                          if (_isFavorite) {
-                            context.read<FavoriteBloc>().add(
-                              AddFavoriteEvent(favorite: shoe.toFavorite()),
-                            );
-                          } else {
-                              context.read<FavoriteBloc>().add(
-                              RemoveFavoriteEvent(id: shoe.id),
-                            );
-                          }
+                          context.read<ShoeBloc>().add(
+                            ToggleShoeEvent(shoe: shoe),
+                          );
                         },
-                        icon: Icon(
-                          _isFavorite ? Icons.favorite : Icons.favorite_border,
+                        icon: BlocBuilder<ShoeBloc, ShoeState>(
+                          builder: (context, state) {
+                            if (state is LoadedShoeState) {
+                              final isFavorite = state.shoes
+                                  .where((e) => e.id == shoe.id)
+                                  .first
+                                  .isFavorite;
+                              return Icon(
+                                isFavorite
+                                    ? Icons.favorite
+                                    : Icons.favorite_border,
+                              );
+                            }
+                            return Icon(Icons.favorite_border);
+                          },
                         ),
                       ),
                     ),
