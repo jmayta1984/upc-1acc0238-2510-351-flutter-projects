@@ -44,13 +44,15 @@ class NewsListItemView extends StatelessWidget {
             ),
             child: SizedBox(
               height: 200.0,
-              child: Image.network(
-                news.image,
-                fit: BoxFit.cover,
-                height: 200.0,
-                width: double.infinity,
-                errorBuilder: (context, error, stackTrace) =>
-                    const Center(child: Icon(Icons.error, size: 50.0)),
+              width: double.infinity,
+              child: Hero(
+                tag: news.title,
+                child: Image.network(
+                  news.image,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) =>
+                      const Center(child: Icon(Icons.error, size: 50.0)),
+                ),
               ),
             ),
           ),

@@ -23,4 +23,14 @@ class FavoritesNewsDao {
         .map((e) => FavoriteNewsDto.fromDatabase(e).toDomain())
         .toList();
   }
+
+  Future<bool> isFavorite(String title) async {
+    final db = await AppDatabase().database;
+    final List maps = await db.query(
+      'news',
+      where: 'title = ?',
+      whereArgs: [title],
+    );
+    return maps.isNotEmpty;
+  }
 }

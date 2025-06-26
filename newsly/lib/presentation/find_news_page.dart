@@ -14,7 +14,14 @@ class _FindNewsPageState extends State<FindNewsPage> {
   List<News> _newsList = [];
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    print('FindNewsPage build');
+
     return Column(
       children: [
         Padding(
