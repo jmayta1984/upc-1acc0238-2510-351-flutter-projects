@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:newsly/data/favorites_news_dao.dart';
 import 'package:newsly/domain/favorite_news.dart';
